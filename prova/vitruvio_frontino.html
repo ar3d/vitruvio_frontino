@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Totem</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Totem">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" href="./styles.css" rel="stylesheet"/>
+    <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
+    <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+  </head>
+  <body>
+    <!-- <model-viewer> HTML element -->
+<model-viewer src="vitruvio_frontino.glb" camera-controls
+    <model-viewer src="totem.glb" poster="poster.webp" ar ar-modes="webxr">
+          <div class="progress-bar hide" slot="progress-bar">
+          <div class="update-bar"></div>
+      </div>
+      <button slot="ar-button" id="ar-button">
+          Mostra nello spazio
+      </button>
+      <div id="ar-prompt">
+          <img src="ar_hand_prompt.png">
+          </model-viewer> 
+    <script src="script.js"></script>
+   
+
+    <!-- Loads <model-viewer> for browsers: -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    </html>

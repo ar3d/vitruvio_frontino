@@ -1,0 +1,28 @@
+<model-viewer src="autori_latini_1.glb" camera-controls ar-modes="scene-viewer webxr quick-look" min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto">
+    <button class="Hotspot" slot="hotspot-1" data-position="-1.625359507563949m 2.196437615628818m 0.3184883194322498m" data-normal="0.2933852268846389m -1.1916788151003441e-7m 0.9559943036680894m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">catone</div>
+    </button><button class="Hotspot" slot="hotspot-2" data-position="-0.1794465978648797m 2.2136862437722487m -0.22626543623250006m" data-normal="-0.004817463585663513m -3.583065769678856e-8m 0.999988395954973m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">cicerone</div>
+    </button><button class="Hotspot" slot="hotspot-3" data-position="1.1664695972265728m 2.230528954267459m 0.08380176931012417m" data-normal="-0.346858566497678m -4.785652334599296e-9m 0.9379174456460312m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">varrone</div>
+    </button><button class="Hotspot" slot="hotspot-4" data-position="2.4663495426401894m 2.215433883104505m 0.5194541567438788m" data-normal="-0.6042837278580862m -2.4752120933767643e-8m 0.7967692114068754m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">orazio</div>
+    </button><button class="Hotspot" slot="hotspot-5" data-position="-1.4866561472614557m 0.8236892609992942m 0.9406779792839594m" data-normal="0.1930054895452926m 0.882490292267676m 0.4289053101311455m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">audio catone</div>
+    </button><button class="Hotspot" slot="hotspot-6" data-position="-0.2925385488540577m 0.8198680333138589m 0.35657617317323287m" data-normal="0.03676059918546025m 0.883578170362257m 0.46683859652647886m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">audio cicerone</div>
+    </button><button class="Hotspot" slot="hotspot-7" data-position="0.9691647385886643m 0.8081122167277004m 0.7443142312402582m" data-normal="-0.16801243498808757m 0.8842165081671292m 0.4358130199685445m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">audio varrone</div>
+    </button><button class="Hotspot" slot="hotspot-8" data-position="2.047377168266319m 0.8122701689435591m 1.080448920678501m" data-normal="-0.21389839640559444m 0.8809182141828775m 0.42217363244992634m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">audio orazio</div>
+    </button>
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+    <button slot="ar-button" id="ar-button">
+        View in your space
+    </button>
+    <div id="ar-prompt">
+        <img src="https://modelviewer.dev/shared-assets/icons/hand.png">
+    </div>
+</model-viewer>

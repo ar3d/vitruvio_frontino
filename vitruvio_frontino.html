@@ -1,19 +1,41 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Totem</title>
+    <title>Venafro descritta dagli autori latini dopo la fondazione della Colonia iulia Augusta</title>
     <meta charset="utf-8">
-    <meta name="description" content="Totem">
+    <meta name="description" content="Venafro descritta dagli autori latini dopo la fondazione della Colonia iulia Augusta">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
     <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
     <script src="https://unpkg.com/focus-visible@5.0.2/dist/focus-visible.js" defer></script>
+		<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css' type='text/css' media='all' />
+		<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Fjalla+One' type='text/css' media='all' />
+		<link rel='stylesheet' href='http://demo.persaper.it/css/demo.css' type='text/css' media='all' />
+		
+		<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.3/jquery.min.js'></script>
+		<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js'></script>
+		<script type='text/javascript' src='http://demo.persaper.it/js/demo.js'></script>
+                <script type='text/javascript' src='script_vitruvio.js'></script>
+                <script type='text/javascript' src='script_frontino.js'></script>
+                
+		
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
-<model-viewer src="vitruvio_frontino.glb" camera-controls
-    <model-viewer src="totem.glb" poster="poster.webp" ar ar-modes="webxr">
-          <div class="progress-bar hide" slot="progress-bar">
+    <model-viewer src="vitruvio_frontino.glb" camera-controls camera-controls min-camera-orbit="auto 0deg auto" max-camera-orbit="auto 90deg auto" id="modelViewer" ar ar-modes="webxr">
+      <button class="Hotspotpersonaggio" slot="hotspot-1" data-position="-1.322090995115798m 2.2387593072527743m -0.09475167775934817m" data-normal="0.2933852268846389m -1.1916788151003441e-7m 0.9559943036680894m" data-visibility-attribute="visible">
+          <div class="HotspotAnnotationpersonaggio"><div class="popup-me_1">Marco Vitruvio Pollione</div></div>
+      </button><button class="Hotspotpersonaggio" slot="hotspot-2" data-position="0.9392364011055535m 2.2123587734532677m -0.09561728762614469m" data-normal="-0.6042837278580862m -2.4752120933767643e-8m 0.7967692114068754m" data-visibility-attribute="visible">
+          <div class="HotspotAnnotationpersonaggio"><div class="popup-me_2">Sesto Giulio Frontino</div></div>
+      </button><button class="Hotspotaudio" slot="hotspot-3" data-position="-1.6229466814996645m 0.8192618590071927m 0.4128906229219971m" data-normal="0.18072684536193254m 0.8809180661599687m 0.4374027527102512m" data-visibility-attribute="visible">
+          <div class="HotspotAnnotationaudio">De architectura<br><audio controls style="height:35px; width:120px;">
+  <source src="https://ar3d.github.io/autori_latini/latini_1/BENNICI_Danse_Macabre.mp3"</div>
+      </button><button class="Hotspotaudio" slot="hotspot-4" data-position="-0.4004672928585806m 0.8162036558769314m 0.12303915647755331m" data-normal="0.05959881812535037m 0.880918135285536m 0.4695010328030343m" data-visibility-attribute="visible">
+          <div class="HotspotAnnotationaudio">De aquaeductu urbis Romae<br><audio controls style="height:35px; width:120px;">
+  <source src="https://ar3d.github.io/autori_latini/latini_1/BENNICI_Danse_Macabre.mp3"</div>
+      </button>
+
+      <div class="progress-bar hide" slot="progress-bar">
           <div class="update-bar"></div>
       </div>
       <button slot="ar-button" id="ar-button">
@@ -21,10 +43,151 @@
       </button>
       <div id="ar-prompt">
           <img src="ar_hand_prompt.png">
-          </model-viewer> 
+      </div>
+       <div class="mwc-switch-wrapper">
+      <mwc-switch id="toggleHotspotspersonaggio"><span>Mostra le biografie</span></mwc-switch>
+    </div>
+<!--     <paper-toggle-button id="toggleHotspotspersonaggio">Show annotations</paper-toggle-button> --> 
+      <div class="mwc-switch-wrapper-1">
+      <mwc-switch id="toggleHotspotsaudio"><span>Mostra gli audio</span></mwc-switch>
+    </div>
+<!--     <paper-toggle-button id="toggleHotspotsaudio">Show annotations</paper-toggle-button> --> 
+    </model-viewer> 
     <script src="script.js"></script>
-   
+    <script type="module">
+    
+    toggleHotspotspersonaggio.addEventListener('change', () => {
+      modelViewer.classList.toggle('show-hotspotspersonaggio', toggleHotspotspersonaggio.checked);
+    });
+    toggleHotspotsaudio.addEventListener('change', () => {
+      modelViewer.classList.toggle('show-hotspotsaudio', toggleHotspotsaudio.checked);
+    });
+
+  </script>
+
+<script>
+(() => {
+  const modelViewer = document.querySelector('#modelViewer');
+  const tapDistance = 2;
+  let panning = false;
+  let panX, panY;
+  let startX, startY;
+  let lastX, lastY;
+  let metersPerPixel;
+
+  const startPan = () => {
+    const orbit = modelViewer.getCameraOrbit();
+    const {theta, phi, radius} = orbit;
+    const psi = theta - modelViewer.turntableRotation;
+    metersPerPixel = 0.75 * radius / modelViewer.getBoundingClientRect().height;
+    panX = [-Math.cos(psi), 0, Math.sin(psi)];
+    panY = [
+      -Math.cos(phi) * Math.sin(psi),
+      Math.sin(phi),
+      -Math.cos(phi) * Math.cos(psi)
+    ];
+    modelViewer.interactionPrompt = 'none';
+  };
+
+  const movePan = (thisX, thisY) => {
+    const dx = (thisX - lastX) * metersPerPixel;
+    const dy = (thisY - lastY) * metersPerPixel;
+    lastX = thisX;
+    lastY = thisY;
+
+    const target = modelViewer.getCameraTarget();
+    target.x += dx * panX[0] + dy * panY[0];
+    target.y += dx * panX[1] + dy * panY[1];
+    target.z += dx * panX[2] + dy * panY[2];
+    modelViewer.cameraTarget = `${target.x}m ${target.y}m ${target.z}m`;
+
+    // This pauses turntable rotation
+    modelViewer.dispatchEvent(new CustomEvent(
+          'camera-change', {detail: {source: 'user-interaction'}}));
+  };
+
+  const recenter = (pointer) => {
+    panning = false;
+    if (Math.abs(pointer.clientX - startX) > tapDistance ||
+        Math.abs(pointer.clientY - startY) > tapDistance)
+      return;
+    const rect = modelViewer.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const hit = modelViewer.positionAndNormalFromPoint(x, y);
+    modelViewer.cameraTarget =
+        hit == null ? 'auto auto auto' : hit.position.toString();
+  };
+
+  const onPointerUp = (event) => {
+    const pointer = event.clientX ? event : event.changedTouches[0];
+    if (Math.abs(pointer.clientX - startX) < tapDistance &&
+        Math.abs(pointer.clientY - startY) < tapDistance) {
+      recenter(pointer);
+    }
+    panning = false;
+  };
+
+  modelViewer.addEventListener('mousedown', (event) => {
+    startX = event.clientX;
+    startY = event.clientY;
+    panning = event.button === 2 || event.ctrlKey || event.metaKey ||
+        event.shiftKey;
+    if (!panning)
+      return;
+
+    lastX = startX;
+    lastY = startY;
+    startPan();
+    event.stopPropagation();
+  }, true);
+
+  modelViewer.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].clientX;
+    startY = event.touches[0].clientY;
+    panning = event.touches.length === 2;
+    if (!panning)
+      return;
+
+    const {touches} = event;
+    lastX = 0.5 * (touches[0].clientX + touches[1].clientX);
+    lastY = 0.5 * (touches[0].clientY + touches[1].clientY);
+    startPan();
+  }, true);
+
+  modelViewer.addEventListener('mousemove', (event) => {
+    if (!panning)
+      return;
+
+    movePan(event.clientX, event.clientY);
+    event.stopPropagation();
+  }, true);
+
+  modelViewer.addEventListener('touchmove', (event) => {
+    if (!panning || event.touches.length !== 2)
+      return;
+
+    const {touches} = event;
+    const thisX = 0.5 * (touches[0].clientX + touches[1].clientX);
+    const thisY = 0.5 * (touches[0].clientY + touches[1].clientY);
+    movePan(thisX, thisY);
+  }, true);
+
+  self.addEventListener('mouseup', (event) => {
+    recenter(event);
+  }, true);
+  
+  self.addEventListener('touchend', (event) => {
+    if (event.touches.length === 0) {
+      recenter(event.changedTouches[0]);
+    }
+  }, true);
+})();
+</script>
 
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-    </html>
+    <!--   <script type="module" src="https://unpkg.com/@polymer/paper-toggle-button@3.0.1/paper-toggle-button.js?module"></script> -->
+  <script type="module" src="https://unpkg.com/@material/mwc-switch@0.14.1/mwc-switch.js?module"></script>
+  </body>
+</html>
