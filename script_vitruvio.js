@@ -2,7 +2,7 @@ $(document).ready(function() {
 
 	$(".popup-me_1").click(function(){
 
-		pop_init_1( "Marcus Vitruvius Pollio nacque a Formia all'incirca nell'80 a.C. e morì dopo il 15 a.C.. Fu architetto e scrittore romano ed è considerato il più famoso teorico dell'architettura di tutti i tempi." );
+		pop_init_1( "Marcus Vitruvius Pollio nacque a Formia all'incirca nell'80 a.C. e morì dopo il 15 a.C. Fu architetto e scrittore romano ed è considerato il più famoso teorico dell'architettura di tutti i tempi." );
 
 	});
 
